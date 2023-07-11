@@ -3,10 +3,12 @@
   "version": "18.12.1",
   "description": "unilabtem, plataforma de venda e divulgação de negócio",
   "main": "index.js",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node ./index.js"
   },
   "author": "Engenharia na Sociedade",
   "license": "ISC",
@@ -29,8 +31,5 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
-  },
-  "engines": {
-    "node": "18.x"
   }
 }
