@@ -6,6 +6,8 @@ const app = express()
 const morgan = require('morgan')
 const path = require("path")
 const cors = require('cors')
+const schedule = require('node-schedule');
+const Produto = require("./models/produto.js")
 //routes
 const authRouter = require("./routes/auth.routes")
 const usersRouter = require("./routes/User.routes")
@@ -79,6 +81,22 @@ app.use((req, res, next)=>{
 })
 app.use(cors())
 
+
+//Agendamento com node-Schemule - cadastrar post
+const job = schedule.scheduleJob('0 13 * * *', function(){
+    const delitePosts = async ()=>{
+        try {
+            const fourDaysAgo = new Date();
+            fourDaysAgo.setDate(fourDaysAgo.getDate() - 6);
+        
+            await Produto.deleteMany({ createdAt: { $lte: fourDaysAgo } });
+          } catch (error) {
+            console.error('Erro ao deletar posts:', error.message);
+          }
+    }
+
+    delitePosts()
+});
 
 //routas
 
