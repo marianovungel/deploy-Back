@@ -9,24 +9,22 @@ router.post("/login", async(req, res)=>{
         
         var newTolk = req.body.sigToken;
         
-        getUser = await aUser(newTolk)
-        
+        const getUser = await aUser(newTolk)
         const verifyAccante = await UserSig.findOne({
-            username: getUser.data[0].login,
             email: getUser.data[0].email
         })
-        console.log(verifyAccante)
-        if(verifyAccante){
+        
+        if(verifyAccante !== null ){
             const accessToken = jwt.sign({
                 id: verifyAccante._id,
             }, process.env.JWT_SEC)
             res.status(200).json({...verifyAccante._doc, accessToken});
         }else{
             const nerUser = new UserSig({
-                username: user.login,
+                username: getUser.data[0].login,
                 email: getUser.data[0].email,
                 whatsapp: "(xx)-xxxxx-xxxx",
-                profilePic: "74d5d28e4db58837d16d30eb57d8e8e6"
+                profilePic: "https://static.thenounproject.com/png/363640-200.png"
             });
 
             const AuthUser = await nerUser.save();
