@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema({
     },
     profilePic:{
         type:String,
-        default: "74d5d28e4db58837d16d30eb57d8e8e6"
+        default: "https://static.thenounproject.com/png/363640-200.png"
     },
     whatsapp: {
         type:String,
