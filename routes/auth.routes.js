@@ -29,7 +29,7 @@ const verifyTokenAndAuthorizationUser =  (req, res, next)=>{
             email: req.user.to,
             whatsapp: req.user.whatsapp,
             password: hashedPass,
-            profilePic: "74d5d28e4db58837d16d30eb57d8e8e6"
+            profilePic: "https://static.thenounproject.com/png/363640-200.png"
         });
         AuthUser = await nerUser.save();
         if(req.user){
