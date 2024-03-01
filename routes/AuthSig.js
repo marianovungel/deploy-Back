@@ -18,7 +18,8 @@ router.post("/login", async(req, res)=>{
             const accessToken = jwt.sign({
                 id: verifyAccante._id,
             }, process.env.JWT_SEC)
-            res.status(200).json({...verifyAccante._doc, accessToken});
+            const sig = true;
+            res.status(200).json({...verifyAccante._doc, accessToken, sig});
         }else{
             const nerUser = new UserSig({
                 username: getUser.data[0].login,
@@ -32,7 +33,8 @@ router.post("/login", async(req, res)=>{
             const accessToken = jwt.sign({
                 id: AuthUser._id,
             }, process.env.JWT_SEC)
-            res.status(200).json({...AuthUser._doc, accessToken});
+            const sig = true;
+            res.status(200).json({...AuthUser._doc, accessToken, sig});
         }
         
     }catch(err){

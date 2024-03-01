@@ -85,7 +85,8 @@ router.post("/login", async(req, res)=>{
           }, process.env.JWT_SEC)
           
           const {password, ...others} = user._doc;
-          res.status(200).json({...others, accessToken});
+          const sig = false;
+          res.status(200).json({...others, accessToken, sig});
         // res.status(200).json(others);
     }catch(err){
         res.status(500).json(err);
