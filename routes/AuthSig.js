@@ -4,6 +4,23 @@ const aUser = require("../services/apiSigLogin.js").userget
 var jwt = require('jsonwebtoken');
 var UserSig = require('../models/UserSig.js')
 
+router.put("/:id", async (req, res) => {
+    const id = req.params.id;
+    const novo_user = req.body;
+    if(novo_user.userId === id){
+        try{
+            const updateUser = await UserSig.findByIdAndUpdate(id, {
+                $set: novo_user
+            }, {new:true});
+            res.json({error: false, updateUser});
+        }catch(err){
+            res.json({error: true, message: err.message});
+        }
+    }else{
+        res.status(401).json("tu só podes atualizar a sua conta");
+    }
+})
+
 router.post("/login", async(req, res)=>{
     try{
         
