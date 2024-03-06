@@ -12,8 +12,8 @@ router.put("/:id", async (req, res) => {
             const updateUser = await UserSig.findByIdAndUpdate(id, {
                 $set: novo_user
             }, {new:true});
-            const sig = true;
-            res.json({error: false, updateUser, sig});
+            
+            res.json({error: false, updateUser, sig:true});
         }catch(err){
             res.json({error: true, message: err.message});
         }
