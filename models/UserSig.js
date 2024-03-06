@@ -21,6 +21,10 @@ const UserSigSchema = new mongoose.Schema({
         required:true,
         unique:true
     },
+    sig: {
+        type:Boolean,
+        default: true
+    }
 },
     {timestamps: true}
 );

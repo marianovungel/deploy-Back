@@ -13,7 +13,7 @@ router.put("/:id", async (req, res) => {
                 $set: novo_user
             }, {new:true});
             
-            res.json({error: false, updateUser, sig:true});
+            res.json({error: false, updateUser});
         }catch(err){
             res.json({error: true, message: err.message});
         }
@@ -36,8 +36,7 @@ router.post("/login", async(req, res)=>{
             const accessToken = jwt.sign({
                 id: verifyAccante._id,
             }, process.env.JWT_SEC)
-            const sig = true;
-            res.status(200).json({...verifyAccante._doc, accessToken, sig});
+            res.status(200).json({...verifyAccante._doc, accessToken});
         }else{
             const nerUser = new UserSig({
                 username: getUser.data[0].login,
