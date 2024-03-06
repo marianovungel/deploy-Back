@@ -28,7 +28,7 @@ router.post("/login", async(req, res)=>{
         
         const getUser = await aUser(newTolk)
         const verifyAccante = await UserSig.findOne({
-            email: getUser.data[0].email
+            username: getUser.data[0].login
         })
         
         if(verifyAccante !== null ){
