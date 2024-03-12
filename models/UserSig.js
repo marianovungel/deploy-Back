@@ -19,7 +19,7 @@ const UserSigSchema = new mongoose.Schema({
         type:String,
         default: "",
         required:true,
-        unique:true
+        unique:false
     },
     sig: {
         type:Boolean,
