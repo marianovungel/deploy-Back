@@ -41,7 +41,7 @@ router.post("/login", async(req, res)=>{
             const nerUser = new UserSig({
                 username: getUser.data[0].login,
                 email: getUser.data[0].email,
-                whatsapp: `+55${getUser.data[0].codigo_area_nacional_telefone_celular}${getUser.data[0].telefone_celular}`,
+                whatsapp: `${getUser.data[0].codigo_area_nacional_telefone_celular}${getUser.data[0].telefone_celular}`,
                 profilePic: "https://static.thenounproject.com/png/363640-200.png"
             });
 
