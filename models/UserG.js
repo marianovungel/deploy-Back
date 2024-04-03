@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const UserGoogleSchema = new mongoose.Schema({
+const UserGSchema = new mongoose.Schema({
     username:{
         type:String,
         required:true,
@@ -37,4 +37,4 @@ const UserGoogleSchema = new mongoose.Schema({
     {timestamps: true}
 );
 
-module.exports = mongoose.model("UserGoogle", UserGoogleSchema);
+module.exports = mongoose.model("UserG", UserGSchema);
