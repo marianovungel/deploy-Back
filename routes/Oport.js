@@ -29,8 +29,8 @@ router.get('/:id', async (req, res) => {
 //get all post
 router.get('/', async (req, res) => {
     try{
-        const res = await Oport.find()
-        res.json(res);
+        const result = await Oport.find()
+        res.status(200).json(result);
         }catch(err){
             res.json({error: true, message: err.message});
         }
