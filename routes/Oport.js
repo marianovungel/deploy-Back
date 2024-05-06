@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
 router.get('/', async (req, res) => {
     try{
         const res = await Oport.find()
-        res.status(200).json(res);
+        res.json(res);
         }catch(err){
             res.json({error: true, message: err.message});
         }
