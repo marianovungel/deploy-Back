@@ -140,6 +140,52 @@ router.post("/sendemail", async(req, res)=>{
     }
     
 });
+router.post("/emailanalise", async(req, res)=>{
+    try{
+        const user = await User.findOne({ email: req.body.to});
+
+        if(!user){
+            return res.status(400).json("Não existe usuário cadastrado com este email!");
+        }
+        if(user){
+            
+            var codigo = req.body.codigo
+            var from = req.body.from
+            var to = req.body.to
+            var subject = "Reset Password"
+            var message = `O usuário ${user.username}!  cadastrou  ${codigo} para análise. Acesse o link para Avaliar: http://localhost:3000/monitor`
+
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                user: 'unilabtem@gmail.com',
+                pass: 'xruetlpwtoquvnye'
+                }
+            })
+
+            var mailOptions = {
+                from: from,
+                to:to,
+                subject:subject,
+                text:message
+            }
+
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                    return status(500).json("Algo deu errado no envio do email...");
+                } else {
+                    console.log("Email Sent: " + info.response)
+                  return  res.status(200).json(codigo);
+                }
+                // response.redirect("/")
+            })
+        }
+        return res.status(200).json(user);
+    }catch(err){
+        res.status(500).json(err);
+    }
+    
+});
 router.post("/sendemailtoconfirm", async(req, res)=>{
     try{
         const user = req.body;
