@@ -142,11 +142,12 @@ router.post("/sendemail", async(req, res)=>{
 });
 router.post("/emailanalise", async(req, res)=>{
     try{
+        if(req.body.to){
             
             var codigo = req.body.codigo
             var from = req.body.from
             var to = req.body.to
-            var subject = "Análise de Cadastro [UNILABTEM]"
+            var subject = "Análise de Cadastro UNILABTEM"
             var message = ` Novo  ${codigo} foi cadastrado e enviado para análise. Acesse o link para Avaliar: http://localhost:3000/monitor`
 
             var transporter = nodemailer.createTransport({
@@ -165,15 +166,16 @@ router.post("/emailanalise", async(req, res)=>{
             }
 
             transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                return status(500).json("Algo deu errado no envio do email...");
-            } else {
-                console.log("Email Sent: " + info.response)
-                return  res.status(200).json(codigo);
-            }
+                if (error) {
+                    return status(500).json("Algo deu errado no envio do email...");
+                } else {
+                    console.log("Email Sent: " + info.response)
+                  return  res.status(200).json(codigo);
+                }
                 // response.redirect("/")
-        })
-        return res.status(200).json(user);
+            })
+        }
+        return res.status(200).json("Email enciado com SUCESSO!");
     }catch(err){
         res.status(500).json(err);
     }
