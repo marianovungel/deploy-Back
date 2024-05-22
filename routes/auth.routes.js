@@ -153,7 +153,7 @@ router.post("/emailanalise", async(req, res)=>{
             var from = req.body.from
             var to = req.body.to
             var subject = "Reset Password"
-            var message = `O usuário ${user.username}!  cadastrou  ${codigo} para análise. Acesse o link para Avaliar: http://localhost:3000/monitor`
+            var message = ` Novo  ${codigo} foi cadastrado e enviado para análise. Acesse o link para Avaliar: http://localhost:3000/monitor`
 
             var transporter = nodemailer.createTransport({
                 service: 'gmail',
