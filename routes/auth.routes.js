@@ -142,12 +142,6 @@ router.post("/sendemail", async(req, res)=>{
 });
 router.post("/emailanalise", async(req, res)=>{
     try{
-        const user = await User.findOne({ email: req.body.to});
-
-        if(!user){
-            return res.status(400).json("Não existe usuário cadastrado com este email!");
-        }
-        if(user){
             
             var codigo = req.body.codigo
             var from = req.body.from
@@ -171,15 +165,14 @@ router.post("/emailanalise", async(req, res)=>{
             }
 
             transporter.sendMail(mailOptions, function(error, info){
-                if (error) {
-                    return status(500).json("Algo deu errado no envio do email...");
-                } else {
-                    console.log("Email Sent: " + info.response)
-                  return  res.status(200).json(codigo);
-                }
+            if (error) {
+                return status(500).json("Algo deu errado no envio do email...");
+            } else {
+                console.log("Email Sent: " + info.response)
+                return  res.status(200).json(codigo);
+            }
                 // response.redirect("/")
-            })
-        }
+        })
         return res.status(200).json(user);
     }catch(err){
         res.status(500).json(err);
